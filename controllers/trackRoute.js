@@ -5,8 +5,8 @@ const Track = require('../models/tracks')
 
 router.post('/', async (req,res) =>{
     try{
-        const {title, artist} = req.body;
-        const newTrack = await Track.create({title, artist});
+        const {title, artist, coverArtUrl, soundClipUrl} = req.body;
+        const newTrack = await Track.create({title, artist, coverArtUrl, soundClipUrl});
         res.status(201).json(newTrack)
     }catch (err){
         res.status(500).json(err)
@@ -33,8 +33,8 @@ router.get('/:trackId', async (req,res) => {
 
 router.put('/:trackId', async (req,res) => {
     try{
-        const {title, artist} = req.body;
-        const tracks = await Track.findByIdAndUpdate(req.params.trackId, {title, artist});
+        const {title, artist, coverArtUrl, soundClipUrl} = req.body;
+        const tracks = await Track.findByIdAndUpdate(req.params.trackId, {title, artist, coverArtUrl, soundClipUrl}, {new: true});
         res.status(200).json(tracks);
     }catch (err){
         res.status(500).json(err)
